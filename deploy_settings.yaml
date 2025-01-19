@@ -1,0 +1,10 @@
+server:
+  ip: 127.0.0.1
+  port: 3000
+models:
+  Users:
+    name_max_length: 50
+    surname_max_length: 50
+  Roles:
+    name_max_length: 50
+    description_max_length: 200
