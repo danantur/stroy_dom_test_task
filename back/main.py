@@ -1,5 +1,3 @@
-import time
-
 import uvicorn
 from fastapi import FastAPI, Request, HTTPException
 from sqlalchemy.exc import IntegrityError
@@ -12,10 +10,24 @@ from settings import SERVER_SETTINGS
 
 Base.metadata.create_all(bind=engine)
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI()
 
 app.include_router(user_router)
 app.include_router(role_router)
+
+origins = [
+    f"http://localhost:{SERVER_SETTINGS["front_port"]}"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.get("/")
@@ -30,4 +42,4 @@ async def unicorn_exception_handler(request: Request, exc: IntegrityError):
     )
 
 if __name__ == '__main__':
-    uvicorn.run(app, host=SERVER_SETTINGS["ip"], port=SERVER_SETTINGS["port"])
+    uvicorn.run(app, host=SERVER_SETTINGS["ip"], port=SERVER_SETTINGS["back_port"])

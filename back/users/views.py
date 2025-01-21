@@ -1,5 +1,4 @@
 from fastapi import HTTPException, Depends, APIRouter
-from sqlalchemy.exc import IntegrityError
 
 from sqlalchemy.orm import Session
 
@@ -11,7 +10,7 @@ router = APIRouter(prefix="/users", tags=["users"])
 
 @router.post("/", response_model=UserORM, description="Добавляет пользователя")
 def create_user(user: UserData, db: Session = Depends(get_db)):
-    db_user = User(name=user.name, surname=user.surname, email=user.email)
+    db_user = User(name=user.name, surname=user.surname, email=user.email, role_id=user.role_id)
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
@@ -41,6 +40,7 @@ def update_user(user_id: int, user: UserData, db: Session = Depends(get_db)):
     db_user.name = user.name
     db_user.surname = user.surname
     db_user.email = user.email
+    db_user.role_id = user.role_id
     db.commit()
     db.refresh(db_user)
     return db_user
@@ -54,15 +54,4 @@ def delete_user(user_id: int, db: Session = Depends(get_db)):
 
     db.delete(db_user)
     db.commit()
-    return db_user
-
-@router.put("/{user_id}/set_role", response_model=UserORM, description="Устанавливает роль пользователя в системе")
-def update_user(user_id: int, role_id: RoleID, db: Session = Depends(get_db)):
-    db_user = db.query(User).filter(User.id == user_id).first()
-    if db_user is None:
-        raise HTTPException(status_code=404, detail="User not found")
-
-    db_user.role_id = role_id.role_id
-    db.commit()
-    db.refresh(db_user)
     return db_user
