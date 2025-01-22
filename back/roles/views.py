@@ -4,9 +4,9 @@ from typing import List
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from back.db import get_db
-from back.roles.model import Role
-from back.schemas import RoleORM, RoleData
+from db import get_db
+from roles.model import Role
+from schemas import RoleORM, RoleData
 
 router = APIRouter(prefix="/roles", tags=["roles"])
 
@@ -41,8 +41,7 @@ def update_role(role_id: int, role: RoleData, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Role not found")
 
     db_role.name = role.name
-    db_role.surname = role.surname
-    db_role.email = role.email
+    db_role.description = role.description
     db.commit()
     db.refresh(db_role)
     return db_role
