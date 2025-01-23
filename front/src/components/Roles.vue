@@ -184,7 +184,7 @@ function deleteSelectedRoles() {
             </template>
         </Dialog>
 
-        <Dialog v-model:visible="deleteRoleDialog" :style="{ width: '450px' }" header="Confirm" :modal="true">
+        <Dialog v-model:visible="deleteRoleDialog" :style="{ width: '450px' }" header="Подтверждение" :modal="true">
             <div class="flex items-center gap-4">
                 <i class="pi pi-exclamation-triangle !text-3xl" />
                 <span v-if="role"
@@ -193,19 +193,19 @@ function deleteSelectedRoles() {
                 >
             </div>
             <template #footer>
-                <Button label="No" icon="pi pi-times" text @click="deleteRoleDialog = false" />
-                <Button label="Yes" icon="pi pi-check" @click="deleteRole" />
+                <Button label="Нет" icon="pi pi-times" text @click="deleteRoleDialog = false" />
+                <Button label="Да" icon="pi pi-check" @click="deleteRole" />
             </template>
         </Dialog>
 
-        <Dialog v-model:visible="deleteRolesDialog" :style="{ width: '450px' }" header="Confirm" :modal="true">
+        <Dialog v-model:visible="deleteRolesDialog" :style="{ width: '450px' }" header="Подтверждение" :modal="true">
             <div class="flex items-center gap-4">
                 <i class="pi pi-exclamation-triangle !text-3xl" />
                 <span v-if="role">Вы уверены, что хотите удалить выбранные роли?</span>
             </div>
             <template #footer>
-                <Button label="No" icon="pi pi-times" text @click="deleteRolesDialog = false" />
-                <Button label="Yes" icon="pi pi-check" text @click="deleteSelectedRoles" />
+                <Button label="Нет" icon="pi pi-times" text @click="deleteRolesDialog = false" />
+                <Button label="Да" icon="pi pi-check" text @click="deleteSelectedRoles" />
             </template>
         </Dialog>
 </template>

@@ -1,5 +1,13 @@
 <script setup>
 
+import { onMounted } from 'vue';
+
+onMounted(() => {
+    back_url = location.protocol + '//' + location.hostname + ":3001"
+})
+
+let back_url = location.protocol + '//' + location.hostname + ":3001"
+
 </script>
 
 <template>
@@ -26,5 +34,13 @@
                 <span>TestApp</span>
             </router-link>
         </div>
+        <a :href="back_url + '/docs'" class="layout-topbar-actions">
+            <p>API</p>
+        </a>
     </div>
 </template>
+
+
+<style>
+
+</style>

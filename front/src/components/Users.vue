@@ -194,7 +194,7 @@ function deleteSelectedUsers() {
             </template>
         </Dialog>
 
-        <Dialog v-model:visible="deleteUserDialog" :style="{ width: '450px' }" header="Confirm" :modal="true">
+        <Dialog v-model:visible="deleteUserDialog" :style="{ width: '450px' }" header="Подтверждение" :modal="true">
             <div class="flex items-center gap-4">
                 <i class="pi pi-exclamation-triangle !text-3xl" />
                 <span v-if="user"
@@ -203,19 +203,19 @@ function deleteSelectedUsers() {
                 >
             </div>
             <template #footer>
-                <Button label="No" icon="pi pi-times" text @click="deleteUserDialog = false" />
-                <Button label="Yes" icon="pi pi-check" @click="deleteUser" />
+                <Button label="Нет" icon="pi pi-times" text @click="deleteUserDialog = false" />
+                <Button label="Да" icon="pi pi-check" @click="deleteUser" />
             </template>
         </Dialog>
 
-        <Dialog v-model:visible="deleteUsersDialog" :style="{ width: '450px' }" header="Confirm" :modal="true">
+        <Dialog v-model:visible="deleteUsersDialog" :style="{ width: '450px' }" header="Подтверждение" :modal="true">
             <div class="flex items-center gap-4">
                 <i class="pi pi-exclamation-triangle !text-3xl" />
                 <span v-if="user">Вы уверены, что хотите удалить выбранных пользователей?</span>
             </div>
             <template #footer>
-                <Button label="No" icon="pi pi-times" text @click="deleteUsersDialog = false" />
-                <Button label="Yes" icon="pi pi-check" text @click="deleteSelectedUsers" />
+                <Button label="Нет" icon="pi pi-times" text @click="deleteUsersDialog = false" />
+                <Button label="Да" icon="pi pi-check" text @click="deleteSelectedUsers" />
             </template>
         </Dialog>
 </template>
